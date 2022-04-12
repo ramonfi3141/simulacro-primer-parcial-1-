@@ -1,4 +1,5 @@
 <?php
+
 /**En la clase Cuota:
 1. Se registra la siguiente información: número ,monto_cuota , monto_interes y cancelada (atributo que va a
 contener un valor true, si la cuota esta paga y false en caso contrario)
@@ -55,8 +56,14 @@ que deben ser aplicados.
         }
         //5. Implementar el método darMontoFinalCuota() que retorna el importe total de la cuota mas los intereses
         // que deben ser aplicados.
-        public function darMontoFinalCuota(){
 
+
+        public function darMontoFinalCuota(){
+            //$importeTotal
+
+            $importeTotal=$this->getMonto() + $this->getMontInt();
+            
+            return $importeTotal;
         }
 
 
@@ -66,7 +73,7 @@ que deben ser aplicados.
         //número ,monto_cuota , monto_interes y cancelada 
         public function __toString()
         {
-            return " numero: " . $this->getNumero()."\n" ." monto de cuota :". $this->getMonto()."\n". " monto de interes : ".$this->getMontInt()."\n". " cancelada : ".$this->getCancelada() ."\n";     
+            return " numero de cuota : " . $this->getNumero()."\n" ." monto de la cuota :". $this->getMonto()."\n". " monto de los interes : ".$this->getMontInt()."\n". "El estado actual de la cuota es : ".$this->getCancelada() ."\n";     
         
         }
     }
