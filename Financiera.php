@@ -49,11 +49,9 @@ cuota a pagar. El método debe retornar la referencia a la cuota. Utilizar para 
 
         /**5. Implementar el método incorporarPrestamo que recibe por parámetro un nuevo préstamo. */
         public function incorporarPrestamo($nuevoPrestamo){
-
-            $array =$this->getColPo();
-
-            return  array_push($array,$nuevoPrestamo);
-
+            $colPrestamos=$this->getColPo();
+            array_push($colPrestamos,$nuevoPrestamo);
+            $this->setColPo($colPrestamos);
             
         }
 
@@ -64,14 +62,19 @@ cuota a pagar. El método debe retornar la referencia a la cuota. Utilizar para 
 
         public function otorgarPrestamoSiCalifica(){
 
+                $colPrestamos=$this->getColPo();
+
+                for ($i=0; $i <count($colPrestamos) ; $i++) { 
+                    echo $colPrestamos[$i] . "\n";
 
         }
 
         /**7. Implementar el método informarCuotaPagar(idPrestamo) que recibe por parámetro la identificación del
         préstamo, se busca el préstamo en la colección de prestamos y si es encontrado se obtiene la siguiente
-        cuota a pagar. El método debe retornar la referencia a la cuota. Utilizar para su implementación el método darSiguienteCuotaPagar */
+        cuota a pagar(ver). El método debe retornar la referencia a la cuota. Utilizar para su implementación el método darSiguienteCuotaPagar */
         public function informarCuotaPagar($idPrestamo){
 
+                    $colPrestamos=$this->getColPo();
 
 
 

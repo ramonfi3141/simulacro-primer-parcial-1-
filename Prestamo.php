@@ -104,13 +104,16 @@ class Prestamo{
         $this->cliente=$client;
     }
         /**Implementar el método privado calcularInteresPrestamo(numCuota) que recibe por parámetro el numero de la cuota y calcula el importe del interés sobre el saldo deudor.
-    Por ejemplo si el préstamo tiene 5 cuotas, el monto total = 50000 y el interés 0.1% entonces el monto del
+    Por ejemplo si el préstamo tiene 5 cuotas, el monto total = 50 000 y el interés 0.1% entonces el monto del
     interés sobre saldo deudor que debe calcularse para cada una de las cuotas deben ser los siguientes:
      interés cuota 1: 50 000 * 0.01 = 500
      interés cuota 2: (50 000 - (  50 000 /5)   )  * 0.01 = 400
      interés cuota 3: (50 000 - ( (50 000 /5)*2 )) * 0.01 = 300
      interés cuota 4: (50 000 - ( (50 000 /5)*3 )) * 0.01 = 200
      interés cuota 5: (50 000 - ( (50 000 /5)*4 )) * 0.01 = 100 */
+
+
+
     private function calcularInteresPrestamo($numCuota) {
         //$calculo
         $montoTotal=$this->getMonto();
