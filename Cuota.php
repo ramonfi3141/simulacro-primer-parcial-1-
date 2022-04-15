@@ -17,7 +17,7 @@ que deben ser aplicados.
         private $numero;
         private $monto_cuota;
         private $monto_interes;
-        private $cancelada =FALSE;
+        private $cancelada ;
 
 
         public function __construct($num,$monto,$interes)
@@ -25,7 +25,7 @@ que deben ser aplicados.
             $this->numero=$num;
             $this->monto_cuota=$monto;
             $this->monto_interes=$interes;
-            // $this->cancelada=$cancel;
+            $this->cancelada=false;//ver  correccion en clase 
 
         }
         //getter
