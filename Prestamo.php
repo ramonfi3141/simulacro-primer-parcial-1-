@@ -170,13 +170,22 @@ class Prestamo{
 
     }
 
+    //. Implementar el método darSiguienteCuotaPagar método que retorna la referencia a la siguiente cuota
+    // que debe ser abonada de un préstamo, si el préstamo tiene todas sus cuotas canceladas retorna null.
+    //min1:20
+    public function darSiguienteCuotaPagar(){
+        //
+        
+
+    }
+
 
 
     //metodo magico
     public function __toString()
     {
-        return " prestamo :". $this->getIndenti() . "\n" .
-               " codigo de electrodomestico :" . $this->getCodigo()  .  "\n" .
+        return "prestamo :". $this->getIndenti() . "\n" .
+               "codigo de electrodomestico :" . $this->getCodigo()  .  "\n" .
                "fecha de otorgamiento : " . $this->getFechaOtorgamiento() . "\n" .
                "monto solicitado : " . $this->getMonto() . "\n" .
                "cantidad de cuotas : " . $this->getCantidadCuotas() . "\n" .
