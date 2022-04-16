@@ -43,13 +43,15 @@ class Prestamo{
     /**2. Método constructor que recibe como parámetros los siguientes valores: identificación, monto, cantidad
     de cuotas, taza de interés y la referencia a la persona que solicito el préstamo. El constructor debe asignar los valores recibidos a las variables instancias que corresponda.
     */
-    public function __construct($indentificacion,$monto ,$cantCuotas ,$tazaInt ,$cliente ){
+    public function __construct($indentificacion,$monto ,$cantCuotas ,$tazaInt ,$ObjCliente ){
         
        $this->indentificacion=$indentificacion;
        $this->monto=$monto;
        $this->cantCuotas=$cantCuotas;
        $this->tazaInt=$tazaInt;
-       $this->cliente=$cliente;
+
+       $this->cliente=$ObjCliente;// delegacion de clase Persona 
+       $this->arrayCuotas=[];// duda _el por que se inicializa aca
     
     }
     //getter
@@ -120,12 +122,50 @@ class Prestamo{
         $cCuotas=$this->getCantidadCuotas();
         $interes=$this->getTazaI();
 
-        for ($i=0; $i <$cCuotas ; $i++) { 
-            $calculo= $montoTotal * $interes  / $i ;
+        $intPres= ( ( $montoTotal - (  ($montoTotal / $cCuotas) * ($numCuota - 1 )  ) ) * $interes * 0.01    ) ;
+
+        return $intPres;
         }
-        return $calculo;
+         
+
+    private function mostrarColeccion(){  
+        //ver dudas investigar .=   --- 
+        //esta fucion esta para pasar mas prolijo las cuotas otra manera ademas de print_r
+        //se proyecta en el __toString 
+        // 50min solucion simulacro
+        $col="";
+        $arrayDeCuotas=$this->getAcuotas();
+
+        $i=0;
+        foreach ($arrayDeCuotas as $cuotas) {
+            $col .= " cuota numero  " . $i . "-" . $cuotas;
+            $i++; 
+        }
+        return $col;
+
+    }
+    //  Implementar el método otorgarPrestamo 
+    // min 1:0 9 solucion parcial
+    public function otorgarPrestamo(){
+        //setea la variable instancia fecha otorgamiento, con la
+        // fecha actual (puede utilizar el valor retornado por la función de PHP getdate()) y genera cada una de las
+        // cuotas dependiendo el valor almacenado en la variable instancia “cantidad_de_cuotas” y monto
+        $this->setFechaOtorgamiento( getdate());
+
+        $cuotas=[];
+
+        $vCuotas=$this->getMonto() / $this->getCantidadCuotas();//El
+        // importe total de la cuota debe ser calculado de la siguiente manera: (monto / cantidad_de_cuotas )
 
 
+        for ($i=1 ; $i <$this->getCantidadCuotas()  ; $i++) { 
+            $objCuota= new Cuota($i,$vCuotas,$this->calcularInteresPrestamo($i));//Método constructor que recibe como parámetros los valores iniciales para los atributos: número,
+            // monto_cuota y monto_interes definidos en la clase
+            // el monto correspondiente al interés debe ser el valor retornado por el método calcularInteresPrestamo(numeroCuota) implementado en el inciso anterior.
+            // interes cuota numCuota = ( monto - (( monto/ cantidad_de_cuotas) * numCuota -1)) * taza_de_interés/0.01
+            $cuotas [$i - 1]=$objCuota;
+            return ;
+        }
 
 
     }
@@ -135,14 +175,14 @@ class Prestamo{
     //metodo magico
     public function __toString()
     {
-        return $this->getIndenti() . "\n" .
-               $this->getCodigo()  .  "\n" .
-               $this->getFechaOtorgamiento() . "\n" .
-               $this->getMonto() . "\n" .
-               $this->getCantidadCuotas() . "\n" .
-               $this-> getTazaI() . "\n" .
-               $this->getAcuotas() . "\n" .
-               $this->getCliente() . "\n"    ;
+        return " prestamo :". $this->getIndenti() . "\n" .
+               " codigo de electrodomestico :" . $this->getCodigo()  .  "\n" .
+               "fecha de otorgamiento : " . $this->getFechaOtorgamiento() . "\n" .
+               "monto solicitado : " . $this->getMonto() . "\n" .
+               "cantidad de cuotas : " . $this->getCantidadCuotas() . "\n" .
+               "con la taza de interes de  : " . $this-> getTazaI() . "\n" .
+               "cuotas : " . $this->mostrarColeccion() . "\n" .// se utiliza la funcion mostrarColeccion para mostrar en pantalla
+               "datos del solicitante : " . $this->getCliente() . "\n"    ;
     }
 
 
